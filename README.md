@@ -8,4 +8,7 @@ This assignment includes:
 
 The projct files are:
 stats.c - Implementation file for the C-programming code
-stats.h - Header file for the C-programming code/* Add Author and Project Details here */
+stats.h - Header file for the C-programming code
+
+Build command:		gcc -o stats.out stats.c
+Run the application:	./stats.out

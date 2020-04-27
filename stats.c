@@ -34,39 +34,100 @@
 */
 void print_statistics(unsigned char min, unsigned char max, unsigned char mean, unsigned char median)
 {
+	printf("\n minimum value: %d", min);
+	printf("\n maximum value: %d", max);
+	printf("\n mean value: %d", mean);
+	printf("\n median value: %d", median);
+	
+	printf("\n");
 }
 
 void print_array(unsigned char* p_test, unsigned int len)
 {
+	if(NULL != p_test){
+		for(int i = 0x00; i< len; i++){
+			printf("\n array value %d:%d",i, p_test[i]);
+		}
+	}
+	printf("\n");
 }
 
 unsigned char find_minimum(unsigned char* p_test, unsigned int len)
 {
 	unsigned char minimum = 0xFF;
+	
+	if(NULL != p_test){
+		for(int i = 0x00; i< len;i++){
+			if(p_test[i] < minimum){
+				minimum = p_test[i];
+			}
+		}
+	}
 	return(minimum);
 }
 
 unsigned char find_maximum(unsigned char* p_test, unsigned int len)
 {
 	unsigned char maximum = 0x00;
+	
+	if(NULL != p_test){
+		for(int i = 0x00; i< len; i++){
+			if(p_test[i] > maximum){
+				maximum = p_test[i];
+			}
+		}
+	}
 	return(maximum);
 }
 
 unsigned char find_mean(unsigned char* p_test, unsigned int len)
 {
 	unsigned int mean= 0x00;
+	
+	if(NULL != p_test){
+		for(int i = 0x00; i< len; i++){
+			mean += p_test[i];
+		}
+	}
+	if(0x00 != len){
+		mean /= len;
+	}
 	return(mean);
 
 }
 
 void sort_array(unsigned char* p_test, unsigned int len)
 {
+	if(NULL != p_test){
+		for(int i = 0x00; i<len; i++){
+			for(int j = i+1; j<len; j++){
+				if(p_test[i] < p_test[j]){
+					unsigned char tmp = p_test[i];
+					p_test[i] = p_test[j];
+					p_test[j] = tmp;
+				}
+			}
+		}
+	}
+
 	return;
 }
 
 unsigned char find_median(unsigned char* p_test, unsigned int len)
 {
+	sort_array(p_test, len);
+
 	unsigned char median = 0x00;
+	unsigned char position = len / 2;
+	
+	if((len > 0x00) && (NULL != p_test)){
+		if(len == 2 * position){
+			median =(p_test[position-1] +  p_test[position]) / 2;
+		}
+		else{
+			median = p_test[position];
+		}
+	}
 	return(median);
 }
 
